@@ -240,10 +240,13 @@ class DelimitedRowGenerator(RowGenerator):
             f.seek(0)
         else:
             dialect = None
-
+        # TODO: find better solution
+        if self.delimiter == 't':
+            self.delimiter = '\t'
         delimiter = self.delimiter if self.delimiter else ','
-
-        return csv.reader(f, delimiter=delimiter, dialect=dialect)
+        return csv.reader((line.replace('\0', '') for line in f),
+                          delimiter=delimiter,
+                          dialect=dialect)
 
     def _yield_rows(self):
 

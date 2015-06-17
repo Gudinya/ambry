@@ -89,6 +89,7 @@ class RowSpecDictTerm(DictTerm):
     data_end_line = ScalarTerm()
     header_lines = ListTerm()
     header_comment_lines = ListTerm()
+    delimiter = ScalarTerm()
 
 
 class SourceTerm(DictTerm):

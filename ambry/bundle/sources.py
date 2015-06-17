@@ -17,6 +17,7 @@ class SourcesFile(object):
         ("start_line", "row_spec.data_start_line"),
         ("end_line", "row_spec.data_end_line"),
         ("comment_lines", "row_spec.header_comment_lines"),
+        ("delimiter", "row_spec.delimiter"),
         ("header_lines", "row_spec.header_lines"),
         ("description", "description"),
         ("url", "url"),
