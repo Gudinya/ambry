@@ -103,6 +103,12 @@ class RowGenerator(object):
 
         return self._unmangled_header
 
+    @classmethod
+    def replace_not_ascii(self, text):
+        if not text:
+            return ''
+        return ''.join([i if ord(i) < 128 else '' for i in text])
+
     def get_header(self):
         """Open the file and read the rows for the header and header comments. It leaves the iterator
         positioned on the first data row. """
@@ -119,10 +125,10 @@ class RowGenerator(object):
             row = self.raw_row_gen.next()
 
             if self.line_number in self.header_lines:
-                headers.append([str(unicode(x).encode('ascii', 'ignore')) for x in row])
+                headers.append([str(unicode(self.replace_not_ascii(x))) for x in row])
 
             if self.line_number in self.header_comment_lines:
-                header_comments.append([str(unicode(x).encode('ascii', 'ignore')) for x in row])
+                header_comments.append([str(unicode(self.replace_not_ascii(x))) for x in row])
 
             i += 1
 
